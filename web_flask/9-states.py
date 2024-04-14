@@ -9,28 +9,27 @@ from models import storage
 app = Flask(__name__)
 
 
-@app.route("/states", strict_slashes=False)
-def display_states():
+@app.route("/states")
+def states():
     """
     Rendern a template that displays a list of states.
     """
     states = storage.all("State").values()
     sorted_states = sorted(states, key=lambda state: state.name)
-    return render_template("9-states.html", states=sorted_states)
+    return render_template("7-states_list.html", states=sorted_states)
 
 
-@app.route("/states/<id>", strict_slashes=False)
 @app.route("/states/<id>", strict_slashes=False)
 def display_state_cities(id):
     """
     Render a template that displays a list of cities by state.
     """
-    state = storage.get("State", id)
-    if state:
-        cities = sorted(state.cities, key=lambda city: city.name)
-        return render_template("9-states.html", state=state, cities=cities)
-    else:
-        return render_template("9-states.html", not_found=True)
+    state = storage.all("State").values()
+    for s in state:
+        if s.id == id:
+            return render_template("9-states.html", state=s)
+
+    return render_template("9-states.html", state=None)
 
 
 @app.teardown_appcontext
