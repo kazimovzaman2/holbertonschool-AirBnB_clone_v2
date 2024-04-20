@@ -17,7 +17,7 @@ def hbnb_filters():
 
     for state in states:
         state.cities = sorted(state.cities, key=lambda x: x.name)
-    
+
     return render_template(
         "10-hbnb_filters.html",
         states=states,
