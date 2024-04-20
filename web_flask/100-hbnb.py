@@ -9,19 +9,21 @@ from models import storage
 app = Flask(__name__)
 
 
-@app.route("/hbnb_filters", strict_slashes=False)
+@app.route("/hbnb", strict_slashes=False)
 def hbnb_filters():
     """Display a HTML page like in 6-index.html."""
     states = sorted(storage.all("State").values(), key=lambda x: x.name)
     amenities = sorted(storage.all("Amenity").values(), key=lambda x: x.name)
+    places = sorted(storage.all("Place").values(), key=lambda x: x.name)
 
     for state in states:
         state.cities = sorted(state.cities, key=lambda x: x.name)
 
     return render_template(
-        "10-hbnb_filters.html",
+        "100-hbnb.html",
         states=states,
         amenities=amenities,
+        places=places
     )
 
 
@@ -33,4 +35,4 @@ def teardown(exc):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0")
+    app.run(host="0.0.0.0", port='5001')

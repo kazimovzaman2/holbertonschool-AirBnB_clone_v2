@@ -8,24 +8,26 @@
 }
 
 .locations {
-	display: inline;
+	display: inline-block;
+	position: relative;
 	vertical-align: middle;
-	float: left;
 	height: 100%;
 	width: 25%;
 
 	line-height: 20px;
 	border-right: 1px solid #DDDDDD;
+	z-index: 1;
 }
 
 .filter_amenities {
-	display: inline;
+	display: inline-block;
+	position: relative;
 	vertical-align: middle;
 	height: 100%;
-	float: left;
 	width: 25%;
 
 	line-height: 20px;
+	z-index: 1;
 }
 
 .popover {
